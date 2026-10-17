@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEGA BOT & MEGASHORK | VEX Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      background: #000;
+      color: #eee;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      height: 65vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at top, #1a001a, #000);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    header h1 {
+      font-size: 3.8rem;
+      margin: 0;
+      color: #0ff;
+      text-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      margin-top: 12px;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    header .tagline {
+      font-size: 1rem;
+      color: #888;
+      margin-top: 8px;
+    }
+
+    nav {
+      background: #0a0a0a;
+      padding: 14px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #222;
+    }
+
+    nav a {
+      margin: 0 18px;
+      color: #0ff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    section {
+      padding: 70px 12%;
+      text-align: center;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    section h2 {
+      font-size: 2.3rem;
+      margin-bottom: 25px;
+      color: #ff00ff;
+      text-shadow: 0 0 15px #ff00ff;
+      letter-spacing: 1px;
+    }
+
+    section p {
+      max-width: 750px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    /* Team Grid Styling */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 30px auto 0 auto;
+    }
+
+    .team-card {
+      background: #080808;
+      border: 2px solid #ff00ff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      border-color: #0ff;
+    }
+
+    .team-card h3 {
+      color: #0ff;
+      margin: 0 0 8px 0;
+      font-size: 1.4rem;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    .team-card .role {
+      color: #ff00ff;
+      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .team-card p {
+      font-size: 0.95rem;
+      color: #aaa;
+      margin: 0;
+    }
+
+    /* Project Links List */
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 750px;
+      margin: 30px auto 0 auto;
+    }
+
+    ul li {
+      margin: 18px 0;
+    }
+
+    ul a {
+      font-size: 1.15rem;
+      color: #0ff;
+      text-decoration: none;
+      border: 2px solid #0ff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      display: block;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 8px #0ff;
+      background: #050505;
+    }
+
+    ul a:hover {
+      background: #0ff;
+      color: #000;
+      text-shadow: none;
+      box-shadow: 0 0 15px #0ff;
+      transform: scale(1.02);
+    }
+
+    /* Like Button Styling */
+    .like-box {
+      margin-top: 35px;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    #likeButton {
+      padding: 12px 22px;
+      font-size: 1.05rem;
+      font-family: 'Share Tech Mono', monospace;
+      border-radius: 8px;
+      border: none;
+      background: #0ff;
+      color: #000;
+      cursor: pointer;
+      text-shadow: 0 0 8px #0ff;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    #likeButton:hover:not(:disabled) {
+      background: #ff00ff;
+      color: #fff;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+
+    #likeButton:disabled {
+      background: #333;
+      color: #777;
+      cursor: not-allowed;
+      text-shadow: none;
+    }
+
+    #likeCount {
+      font-size: 1.2rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    footer {
+      background: #050505;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid #151515;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.5rem; }
+      header p { font-size: 1.1rem; }
+      nav a { margin: 0 8px; font-size: 0.95rem; }
+      section { padding: 50px 6%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <h1>MEGA BOT</h1>
+    <p>🦈 VEX Team • MEGASHORK • 3-Person Unit</p>
+    <div class="tagline">Code • Food • Mechatronics</div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#team">The Team</a>
+    <a href="#megashork">MEGASHORK & Code</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      We are <strong>MEGA BOT</strong>, an elite 3-person VEX V5 Robotics squad operating out of the shadows.
+      Driven by high-torque mechanical engineering, custom Scratch code, and an Hungry vision, 
+      we designed and built our flagship apex machine: <strong>MEGASHORK</strong>.
+    </p>
+    <p style="margin-top: 15px; color: #888; font-size: 0.95rem;">
+      From precision 0.2" odometry tracking loops to custom pneumatic clamping mechanisms, 
+      we turn raw metal and code into arena dominance.
+    </p>
+  </section>
+
+  <!-- Team Section (3 People) -->
+  <section id="team">
+    <h2>The 3-Person Unit</h2>
+    <p>Three minds. One machine. Absolute control.</p>
+
+    <div class="team-grid">
+      <!-- Member 1 -->
+      <div class="team-card">
+        <h3>Anish</h3>
+        <div class="role">[Driver & Mech Lead]</div>
+        <p>Driver controller expert. Designed the 450 RPM 4 motor drive and Bomboclat 2 bar.</p>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="team-card">
+        <h3>Tashvith</h3>
+        <div class="role">[Programmer + Notebooker]</div>
+        <p>Tinkerer and Programer.</p>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="team-card">
+        <h3>Abba</h3>
+        <div class="role">[Loader]</div>
+        <p>Just him + literaly 0 lab hours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects / MEGASHORK Section -->
+  <section id="megashork">
+    <h2>MEGASHORK Projects & Code (DOSENT EXIST YET)</h2>
+    <p>Explore our open-source VEX V5 sub-systems, codebases, and match engineering specs:</p>
+
+    <ul>
+      <li><a href="https://github.com" target="_blank">🦈 MEGASHORK V5 Auton (dosent exist 😭✌️) a></li>
+      <li><a href="https://github.com" target="_blank">🔩 Pneumatic Shark-Jaw Clamping System Specs</a></li>
+      <li><a href="https://github.com" target="_blank">📟 VEX Match Scouting & Terminal Analytics</a></li>
+      <li><a href="https://github.com" target="_blank">📘 Engineering Notebook & Stress Simulation Log</a></li>
+      <li><a href="#about">🌍 Team MEGA BOT Official Portfolio Page</a></li>
+    </ul>
+
+    <!-- Like Button Area -->
+    <div class="like-box">
+      <button id="likeButton">Like</button>
+      <span id="likeCount">0 likes</span>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Transmission / Contact</h2>
+    <p>
+      Interested in alliance scouting, scrimmage matches, or custom VEX code collaboration?
+      Find us online:
+      <br><br>
+      <a href="https://github.com" target="_blank" style="color: #0ff; text-decoration: none; border: 1px solid #0ff; padding: 10px 18px; border-radius: 4px; display: inline-block;">💻 GitHub Organization</a><br><br>
+      <span style="color: #ff00ff; font-size: 0.95rem;">#MEGA_BOT_1408M</span>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    
+    <p>© 2026 MEGA BOT & MEGASHORK Built by Anish @Monkeycpu</p>
+  </footer>
+
+  <!-- Script with LocalStorage Persistence -->
+  <script>
+    const BIN_ID = "megabot_like_storage";
+
+    let liked = localStorage.getItem("liked_megabot") === "true";
+    let storedCount = localStorage.getItem("likeCount_megabot");
+    let count = storedCount ? Number(storedCount) : 48; // Default seed count
+
+    const btn = document.getElementById("likeButton");
+    const countEl = document.getElementById("likeCount");
+
+    function updateUI() {
+      btn.disabled = liked;
+      btn.textContent = liked ? "Liked ✓" : "Like MEGASHORK";
+      countEl.textContent = count + (count === 1 ? " like" : " likes");
+    }
+
+    updateUI();
+
+    btn.addEventListener("click", () => {
+      if (liked) return;
+
+      liked = true;
+      count++;
+
+      localStorage.setItem("liked_megabot", "true");
+      localStorage.setItem("likeCount_megabot", count);
+
+      updateUI();
+    });
+  </script>
+
+</body>
+</html>
